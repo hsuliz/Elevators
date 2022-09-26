@@ -12,7 +12,7 @@ public class ElevatorService {
     private final ElevatorList elevatorList;
 
     public void pickUp(int requestFlor, int movingDirection) {
-
+        //TODO
     }
 
     public Boolean update(Elevator elevator) {
@@ -28,7 +28,7 @@ public class ElevatorService {
     }
 
     public void step() {
-
+        //TODO
     }
 
     public List<Elevator> status() {

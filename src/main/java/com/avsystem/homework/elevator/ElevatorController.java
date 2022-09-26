@@ -20,7 +20,7 @@ public class ElevatorController {
     }
 
     @PutMapping("/elevator")
-    public ResponseEntity<String> update(
+    public ResponseEntity<String> putElevator(
             @RequestBody Elevator elevator
     ) {
         if (elevatorService.update(elevator)) {

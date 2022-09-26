@@ -55,13 +55,14 @@ class ElevatorServiceUpdateTest {
                 0
         );
 
-        //when
         when(elevatorList.getSize()).thenReturn(size);
         when(elevatorList.getList()).thenReturn(elevatorGenerator(size));
+
+        //when
         var actual = elevatorService.update(elevator);
 
         //then
-        assertEquals(expected, elevatorService.update(elevator));
+        assertEquals(expected, actual);
     }
 
 }
