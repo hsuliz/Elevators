@@ -15,8 +15,13 @@ public class ElevatorService {
 
     }
 
-    public void update(int id, int currentFlor, int destinationFlor) {
-
+    public Boolean update(Elevator elevator) {
+        if (elevator.getId() > 16 || elevator.getId() < 1) {
+            return false;
+        }
+        var current = elevatorList.getList().get(elevator.getId() - 1);
+        current = elevator;
+        return true;
     }
 
     public void step() {
