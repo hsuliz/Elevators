@@ -15,15 +15,15 @@ public class ElevatorService {
         //TODO
     }
 
-    public Boolean update(Elevator elevator) {
-        if (validator(elevator)) return false;
+    public boolean update(Elevator elevator) {
+        if (updateValidator(elevator)) return false;
         var current = elevatorList.getList().get(elevator.getId() - 1);
         current.setCurrentFlor(elevator.getCurrentFlor());
         current.setDestinationFlor(elevator.getDestinationFlor());
         return true;
     }
 
-    private boolean validator(Elevator elevator) {
+    private boolean updateValidator(Elevator elevator) {
         return elevator.getId() > elevatorList.getSize() || elevator.getId() < 1;
     }
 

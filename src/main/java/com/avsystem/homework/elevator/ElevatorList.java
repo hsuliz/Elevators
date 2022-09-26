@@ -30,7 +30,7 @@ public class ElevatorList {
         return elevatorList;
     }
 
-    public Integer getSize() {
+    public int getSize() {
         return size;
     }
 

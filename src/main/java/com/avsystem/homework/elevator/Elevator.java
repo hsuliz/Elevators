@@ -9,8 +9,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Elevator {
 
-    private Integer id;
-    private Integer currentFlor;
-    private Integer destinationFlor;
+    private int id;
+    private int currentFlor;
+    private int destinationFlor;
 
 }
