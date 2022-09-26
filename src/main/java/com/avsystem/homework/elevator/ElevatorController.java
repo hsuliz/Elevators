@@ -23,7 +23,7 @@ public class ElevatorController {
     public ResponseEntity<String> update(
             @RequestBody Elevator elevator
     ) {
-        if (elevatorService.update(elevator.getId(), elevator.getCurrentFlor(), elevator.getDestinationFlor())) {
+        if (elevatorService.update(elevator)) {
             return new ResponseEntity<>(
                     "Elevator added!!",
                     HttpStatus.CREATED

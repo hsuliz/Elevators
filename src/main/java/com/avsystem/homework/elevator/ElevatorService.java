@@ -20,7 +20,8 @@ public class ElevatorService {
             return false;
         }
         var current = elevatorList.getList().get(elevator.getId() - 1);
-        current = elevator;
+        current.setCurrentFlor(elevator.getCurrentFlor());
+        current.setDestinationFlor(elevator.getDestinationFlor());
         return true;
     }
 
