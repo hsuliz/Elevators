@@ -19,7 +19,7 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 @MockitoSettings(strictness = Strictness.LENIENT)
-class ElevatorServiceUpdateTest {
+class ElevatorServiceTest {
 
     @Mock
     private ElevatorList elevatorList;
