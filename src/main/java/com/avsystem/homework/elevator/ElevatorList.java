@@ -2,13 +2,13 @@ package com.avsystem.homework.elevator;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
+@Service
 @Slf4j
 public class ElevatorList {
 
@@ -28,6 +28,10 @@ public class ElevatorList {
 
     public List<Elevator> getList() {
         return elevatorList;
+    }
+
+    public Integer getQuantity() {
+        return quantityOfElevators;
     }
 
 }

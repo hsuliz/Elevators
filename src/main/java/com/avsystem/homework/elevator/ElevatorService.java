@@ -16,13 +16,15 @@ public class ElevatorService {
     }
 
     public Boolean update(Elevator elevator) {
-        if (elevator.getId() > 16 || elevator.getId() < 1) {
-            return false;
-        }
+        if (validator(elevator)) return false;
         var current = elevatorList.getList().get(elevator.getId() - 1);
         current.setCurrentFlor(elevator.getCurrentFlor());
         current.setDestinationFlor(elevator.getDestinationFlor());
         return true;
+    }
+
+    private boolean validator(Elevator elevator) {
+        return elevator.getId() > elevatorList.getQuantity() || elevator.getId() < 1;
     }
 
     public void step() {
@@ -32,4 +34,5 @@ public class ElevatorService {
     public List<Elevator> status() {
         return elevatorList.getList();
     }
+
 }
