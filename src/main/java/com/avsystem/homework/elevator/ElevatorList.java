@@ -14,11 +14,11 @@ public class ElevatorList {
 
     private final List<Elevator> elevatorList = new ArrayList<>();
     @Value("${elevator.quantity}")
-    private int quantity;
+    private int size;
 
     @PostConstruct
     private void postConstructor() {
-        for (int i = 0; i < quantity; i++) {
+        for (int i = 0; i < size; i++) {
             var setUp = new Elevator(i + 1, 0, 0);
             elevatorList.add(setUp);
         }
@@ -30,12 +30,8 @@ public class ElevatorList {
         return elevatorList;
     }
 
-    public Integer getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public Integer getSize() {
+        return size;
     }
 
 }

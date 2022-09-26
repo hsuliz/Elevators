@@ -24,7 +24,7 @@ public class ElevatorService {
     }
 
     private boolean validator(Elevator elevator) {
-        return elevator.getId() > elevatorList.getQuantity() || elevator.getId() < 1;
+        return elevator.getId() > elevatorList.getSize() || elevator.getId() < 1;
     }
 
     public void step() {

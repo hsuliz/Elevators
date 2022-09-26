@@ -1,6 +1,5 @@
 package com.avsystem.homework.elevator;
 
-import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -13,7 +12,6 @@ import java.util.List;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-@Slf4j
 class ElevatorServiceTest {
 
     @Mock
@@ -57,12 +55,14 @@ class ElevatorServiceTest {
 
 
         //when
-        when(elevatorList.getQuantity()).thenReturn(2);
+        when(elevatorList.getSize()).thenReturn(2);
         when(elevatorList.getList()).thenReturn(elevatorListG());
         var actual = elevatorService.update(elevatorWithWrongId);
 
         //then
         Assertions.assertTrue(actual);
     }
+
+
 
 }
