@@ -10,9 +10,10 @@ import java.util.List;
 public class ElevatorService {
 
     private final ElevatorList elevatorList;
+    private final ElevatorPicker elevatorPicker;
 
     public void pickUp(int requestFlor, int movingDirection) {
-        //TODO
+        elevatorPicker.pick(requestFlor);
     }
 
     public boolean update(Elevator elevator) {
@@ -24,7 +25,7 @@ public class ElevatorService {
     }
 
     private boolean updateValidator(Elevator elevator) {
-        return elevator.getId() > elevatorList.getSize() || elevator.getId() < 1;
+        return elevator.getId() > elevatorList.getList().size() || elevator.getId() < 1;
     }
 
     public void step() {

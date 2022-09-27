@@ -14,6 +14,15 @@ public class ElevatorController {
 
     private final ElevatorService elevatorService;
 
+    @PostMapping("/pick")
+    public ResponseEntity<String> postPickUp(
+            @RequestParam(name = "reqFlor") int requestFlor,
+            @RequestParam(name = "movDir") int movingDirection
+    ) {
+        elevatorService.pickUp(requestFlor, movingDirection);
+        return new ResponseEntity<>("Pick up request sent!!", HttpStatus.OK);
+    }
+
     @GetMapping("/elevators")
     public List<Elevator> getElevators() {
         return elevatorService.status();
