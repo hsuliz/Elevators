@@ -2,12 +2,11 @@ package com.avsystem.homework.elevator;
 
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
-import java.util.Queue;
+import java.util.*;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 @Service
 public class ElevatorPicker {
@@ -23,13 +22,22 @@ public class ElevatorPicker {
 
     public void run() {
         ExecutorService executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
+        List<Future<Integer>> futureList = new ArrayList<>();
         var indexes = queueMap.keySet().stream().toList();
         try {
-            indexes.forEach(integer -> executor.execute(new MyRunnable(queueMap, integer)));
+            for (Integer integer : indexes) {
+                var x = executor.submit(new MyRunnable(queueMap, integer));
+                futureList.add(x);
+            }
         } catch (Exception exception) {
             exception.printStackTrace();
         }
         executor.shutdown();
+        try {
+            System.out.println(futureList.get(1).get());
+        } catch (InterruptedException | ExecutionException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void pick(int requestFlor) {

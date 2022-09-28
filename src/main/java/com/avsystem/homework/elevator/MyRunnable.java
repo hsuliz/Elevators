@@ -3,25 +3,30 @@ package com.avsystem.homework.elevator;
 
 import java.util.Map;
 import java.util.Queue;
+import java.util.concurrent.Callable;
 
-public class MyRunnable implements Runnable {
+public class MyRunnable implements Callable<Integer> {
 
     private final Map<Integer, Queue<Integer>> queueMap;
     private final int id;
-
+    //private ElevatorService elevatorService;
 
     MyRunnable(Map<Integer, Queue<Integer>> queueMap, int id) {
         this.queueMap = queueMap;
         this.id = id;
     }
 
+
     @Override
-    public void run() {
+    public Integer call() {
         try {
-            System.out.println(queueMap.get(id).poll());
-            //elevatorService.update()
+            Integer poll = queueMap.get(id).poll();
+            if (poll != null) {
+                return poll;
+            }
         } catch (Exception exception) {
             throw new RuntimeException("Threads!!!!!!");
         }
+        return null;
     }
 }
