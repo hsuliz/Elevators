@@ -12,7 +12,6 @@ public class ElevatorService {
     private final ElevatorList elevatorList;
     private final ElevatorPicker elevatorPicker;
 
-    // Have no idea what to do with moving direction
     public void pickUp(int requestFlor) {
         elevatorPicker.pick(requestFlor);
     }

@@ -14,12 +14,11 @@ public class ElevatorController {
 
     private final ElevatorService elevatorService;
 
-    @PostMapping("/pick")
+    @PostMapping("/pick/{flor}")
     public ResponseEntity<String> postPickUp(
-            @RequestParam(name = "reqFlor") int requestFlor,
-            @RequestParam(name = "movDir") int movingDirection
+            @PathVariable int flor
     ) {
-        elevatorService.pickUp(requestFlor);
+        elevatorService.pickUp(flor);
         return new ResponseEntity<>("Pick up request sent!!", HttpStatus.OK);
     }
 
@@ -43,6 +42,12 @@ public class ElevatorController {
                     HttpStatus.BAD_REQUEST
             );
         }
+    }
+
+    @PostMapping("/step")
+    public ResponseEntity<String> getStep() {
+        elevatorService.step();
+        return new ResponseEntity<>("Simulated!!", HttpStatus.OK);
     }
 
 }
