@@ -11,7 +11,6 @@ public class ElevatorService {
 
     private final ElevatorList elevatorList;
     private final ElevatorPicker elevatorPicker;
-    private final ElevatorSimulator elevatorSimulator;
 
     public void pickUp(int requestFlor) {
         elevatorPicker.pick(requestFlor);
@@ -24,8 +23,7 @@ public class ElevatorService {
     }
 
     public void step() {
-        //TODO
-
+        elevatorPicker.run();
     }
 
     public List<Elevator> status() {
