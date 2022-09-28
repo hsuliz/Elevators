@@ -23,7 +23,6 @@ public class ElevatorList {
             elevatorList.add(setUp);
         }
         log.info("Elevator list have been initialized!!");
-        log.info(getList().toString());
     }
 
     public List<Elevator> getList() {

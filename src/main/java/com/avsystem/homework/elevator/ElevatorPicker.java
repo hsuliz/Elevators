@@ -11,7 +11,8 @@ public class ElevatorPicker {
 
     private final ElevatorList elevatorList;
 
-    void pick(int requestFlor) {
+
+    int pick(int requestFlor) {
         var defVal = Math.abs(elevatorList.getList().get(0).getCurrentFlor() - requestFlor);
         var id = elevatorList.getList().get(0).getId();
         for (int i = 0; i < elevatorList.getList().size(); i++) {
@@ -20,7 +21,7 @@ public class ElevatorPicker {
                 id = elevatorList.getList().get(i).getId();
             }
         }
-        log.info(id + " ");
+        return id;
     }
 
 }

@@ -8,6 +8,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -15,14 +16,13 @@ class ElevatorPickerTest {
 
     @Mock
     private ElevatorList elevatorList;
-
     @InjectMocks
     private ElevatorPicker elevatorPicker;
 
     @Test
-    void test() {
+    void pick_ShouldReturnCorrectIdForElevators() {
         //given
-
+        var expectedId = 3;
         var givenList = List.of(
                 new Elevator(1, 1, 1),
                 new Elevator(2, 2, 1),
@@ -31,7 +31,10 @@ class ElevatorPickerTest {
         when(elevatorList.getList()).thenReturn(givenList);
 
         //when
-        elevatorPicker.pick(5);
+        var actual = elevatorPicker.pick(5);
+
+        //then
+        assertThat(actual).isEqualTo(expectedId);
     }
 
 }
