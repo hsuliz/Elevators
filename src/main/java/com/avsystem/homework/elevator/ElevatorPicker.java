@@ -25,7 +25,7 @@ public class ElevatorPicker {
         ExecutorService executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
         try {
             for (int i = 0; i < queueMap.size(); i++) {
-                executor.execute(new MyRunnable(i));
+                executor.execute(new MyRunnable(queueMap));
             }
         } catch (Exception err) {
             err.printStackTrace();
