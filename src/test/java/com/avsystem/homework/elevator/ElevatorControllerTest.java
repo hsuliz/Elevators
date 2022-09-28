@@ -45,15 +45,31 @@ class ElevatorControllerTest {
 
     @Test
     void putElevator_ShouldAcceptThePutMethod() {
+        //given
         MockHttpServletRequest request = new MockHttpServletRequest();
         RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
 
         when(elevatorService.update(any(Elevator.class))).thenReturn(true);
 
+        //when
         Elevator elevator = new Elevator(1, 5, 7);
         ResponseEntity<String> responseEntity = elevatorController.putElevator(elevator);
 
+        //then
         assertThat(responseEntity.getStatusCodeValue()).isEqualTo(201);
+    }
+
+    @Test
+    void postPickUp() {
+        //given
+        MockHttpServletRequest request = new MockHttpServletRequest();
+        RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
+
+        //when
+        ResponseEntity<String> responseEntity = elevatorController.postPickUp(5);
+
+        //then
+        assertThat(responseEntity.getStatusCodeValue()).isEqualTo(200);
     }
 
 }
