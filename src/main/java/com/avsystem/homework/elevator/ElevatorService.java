@@ -24,6 +24,7 @@ public class ElevatorService {
 
     public void step() {
         System.out.println(elevatorPicker.run());
+
     }
 
     public List<Elevator> status() {
