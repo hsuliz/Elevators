@@ -19,7 +19,7 @@ public class ElevatorController {
             @RequestParam(name = "reqFlor") int requestFlor,
             @RequestParam(name = "movDir") int movingDirection
     ) {
-        elevatorService.pickUp(requestFlor, movingDirection);
+        elevatorService.pickUp(requestFlor);
         return new ResponseEntity<>("Pick up request sent!!", HttpStatus.OK);
     }
 

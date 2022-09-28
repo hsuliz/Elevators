@@ -25,7 +25,8 @@ class ElevatorPickerTest {
 
         var givenList = List.of(
                 new Elevator(1, 1, 1),
-                new Elevator(2, 2, 1)
+                new Elevator(2, 2, 1),
+                new Elevator(3, 6, 1)
         );
         when(elevatorList.getList()).thenReturn(givenList);
 

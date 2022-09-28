@@ -12,7 +12,8 @@ public class ElevatorService {
     private final ElevatorList elevatorList;
     private final ElevatorPicker elevatorPicker;
 
-    public void pickUp(int requestFlor, int movingDirection) {
+    // Have no idea what to do with moving direction
+    public void pickUp(int requestFlor) {
         elevatorPicker.pick(requestFlor);
     }
 
@@ -24,16 +25,16 @@ public class ElevatorService {
         return true;
     }
 
-    private boolean updateValidator(Elevator elevator) {
-        return elevator.getId() > elevatorList.getList().size() || elevator.getId() < 1;
-    }
-
     public void step() {
         //TODO
     }
 
     public List<Elevator> status() {
         return elevatorList.getList();
+    }
+
+    private boolean updateValidator(Elevator elevator) {
+        return elevator.getId() > elevatorList.getList().size() || elevator.getId() < 1;
     }
 
 }

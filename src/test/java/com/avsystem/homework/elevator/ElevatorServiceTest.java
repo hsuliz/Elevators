@@ -55,7 +55,6 @@ class ElevatorServiceTest {
                 0
         );
 
-        when(elevatorList.getList().size()).thenReturn(size);
         when(elevatorList.getList()).thenReturn(elevatorGenerator(size));
 
         //when
