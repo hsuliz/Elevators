@@ -23,8 +23,14 @@ public class ElevatorService {
     }
 
     public void step() {
-        System.out.println(elevatorPicker.run());
-
+        var updateMap = elevatorPicker.run();
+        var indexes = updateMap.keySet().stream().toList();
+        System.out.println(updateMap);
+        for (Integer index : indexes) {
+            if (updateMap.get(index) != null) {
+                elevatorList.getList().get(index - 1).setCurrentFlor(updateMap.get(index));
+            }
+        }
     }
 
     public List<Elevator> status() {
