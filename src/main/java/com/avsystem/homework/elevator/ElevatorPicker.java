@@ -4,15 +4,14 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
-import java.util.Queue;
 
 @Service
 public class ElevatorPicker {
 
+    final Map<Integer, List<Integer>> queueMap;
     private final ElevatorList elevatorList;
-
-    private final Map<Integer, Queue<Integer>> queueMap;
 
     public ElevatorPicker(ElevatorList elevatorList) {
         this.elevatorList = elevatorList;
@@ -29,7 +28,6 @@ public class ElevatorPicker {
             }
         }
         queueAdder(id, requestFlor);
-        System.out.println(queueMap);
     }
 
     private void queueAdder(int key, int value) {
