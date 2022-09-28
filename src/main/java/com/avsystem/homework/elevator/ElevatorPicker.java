@@ -4,15 +4,15 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
+import java.util.Queue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 @Service
 public class ElevatorPicker {
 
-    final Map<Integer, List<Integer>> queueMap;
+    final Map<Integer, Queue<Integer>> queueMap;
     private final ElevatorList elevatorList;
 
     public ElevatorPicker(ElevatorList elevatorList) {
@@ -24,9 +24,10 @@ public class ElevatorPicker {
     public void run() {
         ExecutorService executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
         try {
-            for (int i = 0; i < queueMap.size(); i++) {
-                executor.execute(new MyRunnable(queueMap));
-            }
+            var indexes = queueMap.keySet().stream().toList();
+            indexes.forEach(integer -> {
+                executor.execute(new MyRunnable(queueMap, integer));
+            });
         } catch (Exception err) {
             err.printStackTrace();
         }
