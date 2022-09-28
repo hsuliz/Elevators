@@ -23,13 +23,11 @@ public class ElevatorPicker {
 
     public void run() {
         ExecutorService executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
+        var indexes = queueMap.keySet().stream().toList();
         try {
-            var indexes = queueMap.keySet().stream().toList();
-            indexes.forEach(integer -> {
-                executor.execute(new MyRunnable(queueMap, integer));
-            });
-        } catch (Exception err) {
-            err.printStackTrace();
+            indexes.forEach(integer -> executor.execute(new MyRunnable(queueMap, integer)));
+        } catch (Exception exception) {
+            exception.printStackTrace();
         }
         executor.shutdown();
     }
