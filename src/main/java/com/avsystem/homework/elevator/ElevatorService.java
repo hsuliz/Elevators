@@ -23,7 +23,7 @@ public class ElevatorService {
     }
 
     public void step() {
-        elevatorPicker.run();
+        System.out.println(elevatorPicker.run());
     }
 
     public List<Elevator> status() {

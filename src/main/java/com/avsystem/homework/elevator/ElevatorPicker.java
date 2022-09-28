@@ -7,6 +7,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.stream.Collectors;
 
 @Service
 public class ElevatorPicker {
@@ -20,24 +21,26 @@ public class ElevatorPicker {
     }
 
 
-    public void run() {
+    public Map<Integer, Integer> run() {
         ExecutorService executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
         List<Future<Integer>> futureList = new ArrayList<>();
         var indexes = queueMap.keySet().stream().toList();
         try {
-            for (Integer integer : indexes) {
-                var x = executor.submit(new MyRunnable(queueMap, integer));
-                futureList.add(x);
-            }
+            futureList = indexes.stream().map(integer -> executor.submit(new MyRunnable(queueMap, integer))).collect(Collectors.toList());
         } catch (Exception exception) {
             exception.printStackTrace();
         }
         executor.shutdown();
-        try {
-            System.out.println(futureList.get(1).get());
-        } catch (InterruptedException | ExecutionException e) {
-            throw new RuntimeException(e);
+
+        Map<Integer, Integer> outMap = new HashMap<>();
+        for (int i = 0; i < indexes.size(); i++) {
+            try {
+                outMap.put(indexes.get(i), futureList.get(i).get());
+            } catch (InterruptedException | ExecutionException e) {
+                throw new RuntimeException(e);
+            }
         }
+        return outMap;
     }
 
     public void pick(int requestFlor) {
