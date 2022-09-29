@@ -9,7 +9,6 @@ public class MyRunnable implements Callable<Integer> {
 
     private final Map<Integer, Queue<Integer>> queueMap;
     private final int id;
-    //private ElevatorService elevatorService;
 
     MyRunnable(Map<Integer, Queue<Integer>> queueMap, int id) {
         this.queueMap = queueMap;
