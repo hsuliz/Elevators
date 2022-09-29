@@ -12,8 +12,8 @@ import java.util.stream.Collectors;
 @Service
 public class ElevatorPicker {
 
-    final Map<Integer, Queue<Integer>> queueMap;
     private final ElevatorList elevatorList;
+    final Map<Integer, Queue<Integer>> queueMap;
 
     public ElevatorPicker(ElevatorList elevatorList) {
         this.elevatorList = elevatorList;
@@ -26,7 +26,9 @@ public class ElevatorPicker {
         List<Future<Integer>> futureList = new ArrayList<>();
         var indexes = queueMap.keySet().stream().toList();
         try {
-            futureList = indexes.stream().map(integer -> executor.submit(new MyRunnable(queueMap, integer))).collect(Collectors.toList());
+            futureList = indexes.stream()
+                    .map(integer -> executor.submit(new MyRunnable(queueMap, integer)))
+                    .collect(Collectors.toList());
         } catch (Exception exception) {
             exception.printStackTrace();
         }

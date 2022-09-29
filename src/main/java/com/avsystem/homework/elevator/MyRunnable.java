@@ -15,7 +15,6 @@ public class MyRunnable implements Callable<Integer> {
         this.id = id;
     }
 
-
     @Override
     public Integer call() {
         try {
@@ -24,8 +23,10 @@ public class MyRunnable implements Callable<Integer> {
                 return poll;
             }
         } catch (Exception exception) {
+            exception.printStackTrace();
             throw new RuntimeException("Threads!!!!!!");
         }
         return null;
     }
+
 }
