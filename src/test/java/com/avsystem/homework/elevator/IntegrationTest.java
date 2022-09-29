@@ -1,60 +1,100 @@
 package com.avsystem.homework.elevator;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.MediaType;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.web.reactive.server.WebTestClient;
+import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import java.util.List;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@AutoConfigureWebTestClient
-@ActiveProfiles("test")
+@ExtendWith(SpringExtension.class)
+@SpringBootTest(
+        properties = {"elevator.quantity=4"},
+        webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT
+)
 public class IntegrationTest {
+    TestRestTemplate restTemplate = new TestRestTemplate();
+    HttpHeaders headers = new HttpHeaders();
+    @LocalServerPort
+    private int port;
 
-    @Autowired
-    private WebTestClient webClient;
-    @Autowired
-    private ElevatorController elevatorController;
-    @Autowired
-    private ElevatorList elevatorList;
-    @Autowired
-    private ElevatorPicker elevatorPicker;
-    @Autowired
-    private ElevatorService elevatorService;
+    private HttpEntity<String> entity;
+
+    @BeforeEach
+    void setUP() {
+        entity = new HttpEntity<>(null, headers);
+    }
 
     @Test
-    void fullTest() {
+    public void getElevators_ShouldReturnCorrectJson() {
+        String expected = "[" +
+                "{\"id\":1,\"currentFlor\":0}," +
+                "{\"id\":2,\"currentFlor\":0}," +
+                "{\"id\":3,\"currentFlor\":0}," +
+                "{\"id\":4,\"currentFlor\":0}" +
+                "]";
 
-        var exepted = List.of();
+        //when
+        ResponseEntity<String> actual = restTemplate.exchange(
+                createURLWithPort("/api/elevators"),
+                HttpMethod.GET, entity, String.class);
 
-        webClient.put().uri("/api/elevator")
-                .contentType(MediaType.APPLICATION_JSON)
-                .bodyValue("{\"id\": 1, \"currentFlor\": 5}")
-                .exchange();
+        //then
+        assertThat(actual.getBody()).isEqualTo(expected);
+    }
 
-        webClient.put().uri("/api/elevator")
-                .contentType(MediaType.APPLICATION_JSON)
-                .bodyValue("{\"id\": 2, \"currentFlor\": 20}")
-                .exchange();
+    @Test
+    public void endToEnd() {
+        String expected = "[" +
+                "{\"id\":1,\"currentFlor\":0}," +
+                "{\"id\":2,\"currentFlor\":0}," +
+                "{\"id\":3,\"currentFlor\":0}," +
+                "{\"id\":4,\"currentFlor\":0}" +
+                "]";
 
-        System.out.println(elevatorList.getList());
+        //when
+        restTemplate.exchange(
+                createURLWithPort("/api/elevator"),
+                HttpMethod.PUT, entity, String.class
+        );
 
-        webClient.post().uri("/api/pick/10")
-                .exchange();
+        ResponseEntity<String> actual = restTemplate.exchange(
+                createURLWithPort("/api/elevators"),
+                HttpMethod.GET, entity, String.class);
 
-        webClient.post().uri("/api/step")
-                .exchange();
-
-        webClient.get().uri("/api/elevators")
-                .exchange()
-                .expectStatus().isEqualTo(2);
-
-        System.out.println(elevatorList.getList());
+        //then
+        assertThat(actual.getBody()).isEqualTo(expected);
     }
 
 
+    private String createURLWithPort(String uri) {
+        return "http://localhost:" + port + uri;
+    }
+
+    @Test
+    public void addCourse() {
+
+        Course course = new Course("Course1", "Spring", "10 Steps",
+                List.of("Learn Maven", "Import Project", "First Example", "Second Example"));
+
+        HttpEntity<Course> entity = new HttpEntity<Course>(course, headers);
+
+        ResponseEntity<String> response = restTemplate.exchange(
+                createURLWithPort("/students/Student1/courses"),
+                HttpMethod.POST, entity, String.class);
+
+        String actual = response.getHeaders()
+                .get(HttpHeaders.LOCATION)
+                .get(0);
+
+        assertTrue(actual.contains("/students/Student1/courses/"));
+
+    }
 }

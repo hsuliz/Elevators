@@ -40,7 +40,7 @@ class ElevatorControllerTest {
         var actual = elevatorController.getElevators();
 
         //then
-        assertThat(actual.size()).isEqualTo(3);
+        assertThat(actual.getBody().size()).isEqualTo(3);
     }
 
     @Test

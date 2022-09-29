@@ -14,17 +14,17 @@ public class ElevatorController {
 
     private final ElevatorService elevatorService;
 
-    @PostMapping("/pick/{flor}")
+    @PostMapping("/pick/{floor}")
     public ResponseEntity<String> postPickUp(
-            @PathVariable int flor
+            @PathVariable int floor
     ) {
-        elevatorService.pickUp(flor);
+        elevatorService.pickUp(floor);
         return new ResponseEntity<>("Pick up request sent!!", HttpStatus.OK);
     }
 
     @GetMapping("/elevators")
-    public List<Elevator> getElevators() {
-        return elevatorService.status();
+    public ResponseEntity<List<Elevator>> getElevators() {
+        return new ResponseEntity<>(elevatorService.status(), HttpStatus.OK);
     }
 
     @PutMapping("/elevator")
