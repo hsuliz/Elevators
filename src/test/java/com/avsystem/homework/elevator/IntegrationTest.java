@@ -50,51 +50,9 @@ public class IntegrationTest {
         assertThat(actual.getBody()).isEqualTo(expected);
     }
 
-    @Test
-    public void endToEnd() {
-        String expected = "[" +
-                "{\"id\":1,\"currentFlor\":0}," +
-                "{\"id\":2,\"currentFlor\":0}," +
-                "{\"id\":3,\"currentFlor\":0}," +
-                "{\"id\":4,\"currentFlor\":0}" +
-                "]";
-
-        //when
-        restTemplate.exchange(
-                createURLWithPort("/api/elevator"),
-                HttpMethod.PUT, entity, String.class
-        );
-
-        ResponseEntity<String> actual = restTemplate.exchange(
-                createURLWithPort("/api/elevators"),
-                HttpMethod.GET, entity, String.class);
-
-        //then
-        assertThat(actual.getBody()).isEqualTo(expected);
-    }
-
 
     private String createURLWithPort(String uri) {
         return "http://localhost:" + port + uri;
     }
 
-    @Test
-    public void addCourse() {
-
-        Course course = new Course("Course1", "Spring", "10 Steps",
-                List.of("Learn Maven", "Import Project", "First Example", "Second Example"));
-
-        HttpEntity<Course> entity = new HttpEntity<Course>(course, headers);
-
-        ResponseEntity<String> response = restTemplate.exchange(
-                createURLWithPort("/students/Student1/courses"),
-                HttpMethod.POST, entity, String.class);
-
-        String actual = response.getHeaders()
-                .get(HttpHeaders.LOCATION)
-                .get(0);
-
-        assertTrue(actual.contains("/students/Student1/courses/"));
-
-    }
 }
