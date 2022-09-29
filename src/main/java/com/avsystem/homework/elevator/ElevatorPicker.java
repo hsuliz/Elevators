@@ -59,8 +59,6 @@ public class ElevatorPicker {
         if (!queueMap.containsKey(key)) {
             queueMap.put(key, new LinkedList<>());
         }
-        //TODO remove duplicates
-        //List<Integer> newList = queueMap.get(key).stream().distinct().toList();
         queueMap.get(key).add(value);
     }
 
