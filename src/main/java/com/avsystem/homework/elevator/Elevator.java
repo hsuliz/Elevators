@@ -11,6 +11,5 @@ public class Elevator {
 
     private int id;
     private int currentFlor;
-    private int destinationFlor;
 
 }

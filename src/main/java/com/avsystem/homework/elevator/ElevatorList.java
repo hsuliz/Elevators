@@ -19,7 +19,7 @@ public class ElevatorList {
     @PostConstruct
     private void postConstructor() {
         for (int i = 0; i < size; i++) {
-            var setUp = new Elevator(i + 1, 0, 0);
+            var setUp = new Elevator(i + 1, 0);
             elevatorList.add(setUp);
         }
         log.info("Elevator list have been initialized!!");

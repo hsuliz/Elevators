@@ -49,11 +49,7 @@ class ElevatorServiceTest {
     @MethodSource
     void update_ShouldReturnTrueForCorrectOrFalseForIncorrectData(int id, int size, boolean expected) {
         //given
-        var elevator = new Elevator(
-                id,
-                0,
-                0
-        );
+        var elevator = new Elevator(id, 0);
 
         when(elevatorList.getList()).thenReturn(elevatorGenerator(size));
 

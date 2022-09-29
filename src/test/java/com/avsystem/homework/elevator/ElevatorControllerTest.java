@@ -29,9 +29,9 @@ class ElevatorControllerTest {
     void getElevators_ShouldReturnListOfElevators() {
         //given
         var elevators = List.of(
-                new Elevator(1, 2, 3),
-                new Elevator(2, 2, 7),
-                new Elevator(3, 5, 1)
+                new Elevator(1, 2),
+                new Elevator(2, 2),
+                new Elevator(3, 5)
         );
 
         when(elevatorService.status()).thenReturn(elevators);
@@ -52,7 +52,7 @@ class ElevatorControllerTest {
         when(elevatorService.update(any(Elevator.class))).thenReturn(true);
 
         //when
-        Elevator elevator = new Elevator(1, 5, 7);
+        Elevator elevator = new Elevator(1, 5);
         ResponseEntity<String> responseEntity = elevatorController.putElevator(elevator);
 
         //then

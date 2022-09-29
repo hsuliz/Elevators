@@ -42,7 +42,6 @@ public class ElevatorService {
     private void elevatorUpdater(Elevator elevator) {
         var current = elevatorList.getList().get(elevator.getId() - 1);
         current.setCurrentFlor(elevator.getCurrentFlor());
-        current.setDestinationFlor(elevator.getDestinationFlor());
     }
 
 }

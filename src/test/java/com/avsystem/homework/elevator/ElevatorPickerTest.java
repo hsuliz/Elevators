@@ -27,9 +27,9 @@ class ElevatorPickerTest {
         return Stream.of(
                 Arguments.of(
                         List.of(
-                                new Elevator(1, 1, 1),
-                                new Elevator(2, 10, 1),
-                                new Elevator(3, 5, 1)
+                                new Elevator(1, 1),
+                                new Elevator(2, 10),
+                                new Elevator(3, 5)
                         ),
                         Map.of(
                                 1, List.of(1),
